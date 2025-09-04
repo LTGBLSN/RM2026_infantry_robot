@@ -1,0 +1,28 @@
+//
+// Created by 21481 on 2025/3/24.
+//
+
+#ifndef BUBING_RM2025_REFREE_TASK_H
+#define BUBING_RM2025_REFREE_TASK_H
+
+
+#define LEVEL_1_MAX_POWER   15000  //ะกำฺ50w
+#define LEVEL_2_MAX_POWER   8000
+#define LEVEL_3_MAX_POWER   9000
+#define LEVEL_4_MAX_POWER  10000
+#define LEVEL_5_MAX_POWER  11000
+#define LEVEL_6_MAX_POWER  12000
+#define LEVEL_7_MAX_POWER  13000
+#define LEVEL_8_MAX_POWER  14000
+#define LEVEL_9_MAX_POWER  15000
+#define LEVEL_10_MAX_POWER 15000
+
+#define RED 0
+#define BLUE 1
+
+void max_power_compute();
+
+
+
+
+#endif //BUBING_RM2025_REFREE_TASK_H

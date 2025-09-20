@@ -198,7 +198,7 @@ float pitch_radian_from_bmi088 ;
 float yaw_radian_from_bmi088 ;
 float roll_radian_from_bmi088 ;
 
-bool reset_tracker ;
+bool reset_tracker = false ;
 
 
 uint8_t tx_buffer[sizeof(auto_aim_tx_packet)];
@@ -206,6 +206,11 @@ uint8_t tx_buffer[sizeof(auto_aim_tx_packet)];
 float YAW_IMU_LAST_ECD ;
 float YAW_IMU_LAPS ;
 float YAW_IMU_ABSCISSA ;
+
+
+float aim_x ;
+float aim_y ;
+float aim_z ;
 
 
 uint8_t uart1_receive_data ;//串口当前接收字节

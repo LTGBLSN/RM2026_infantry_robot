@@ -3,11 +3,12 @@
 #include "main.h"
 #include "auto_aim.h"
 #include "refree_task.h"
+#include "usart.h"
 
 
 struct ReceivePacket auto_aim_rx_packet;//上位机发过来的
 struct SentPacket auto_aim_tx_packet;//下位机要发出去的
-static uint8_t auto_aim_buffer[48];  // 自瞄数据接收缓冲区
+static uint8_t auto_aim_rx_buffer[48];  // 自瞄数据接收缓冲区
 static volatile uint8_t auto_aim_rx_state = 0;  // 接收状态标志位
 static uint8_t auto_aim_rx_index = 0;  // 接收数组索引
 //数据解析
@@ -20,7 +21,7 @@ void auto_aim_communication_data_parse(uint8_t rx_data)
         if (rx_data == 0xA5)  // 收到包头
         {
             auto_aim_rx_index = 0 ;
-            auto_aim_buffer[auto_aim_rx_index] = rx_data;
+            auto_aim_rx_buffer[auto_aim_rx_index] = rx_data;
             auto_aim_rx_state = 1;
             auto_aim_rx_index = 1;
         }
@@ -28,21 +29,21 @@ void auto_aim_communication_data_parse(uint8_t rx_data)
     else if(auto_aim_rx_state == 1)//包头检验过，存储数据
     {
 
-        auto_aim_buffer[auto_aim_rx_index++] = rx_data;//一直存到包满
+        auto_aim_rx_buffer[auto_aim_rx_index++] = rx_data;//一直存到包满
 
         if(auto_aim_rx_index == 48)
         {
             //CRC校验，计算的是除最后校验数据之外的,不能传入整个包
-            calculated_checksum = crc16_Get_CRC16_Check_Sum(auto_aim_buffer, 46, 0xFFFF);
+            calculated_checksum = crc16_Get_CRC16_Check_Sum(auto_aim_rx_buffer, 46, 0xFFFF);
 
             //提取末尾一并发送过来的校验和，小端格式
-            uint16_t received_checksum = (auto_aim_buffer[46] | (auto_aim_buffer[47] << 8));
+            uint16_t received_checksum = (auto_aim_rx_buffer[46] | (auto_aim_rx_buffer[47] << 8));
 
             //判断计算的和发送来的是否相同，不相同说明包中间有错数据
             if (calculated_checksum == received_checksum)
             {
                 //和发送方结构体一模一样，且确保内存布局一致（结构体后面有取消编译器优化对齐）
-                memcpy(&auto_aim_rx_packet, auto_aim_buffer, sizeof(auto_aim_rx_packet));
+                memcpy(&auto_aim_rx_packet, auto_aim_rx_buffer, sizeof(auto_aim_rx_packet));
 
                 //数据接收完成
             }
@@ -62,53 +63,31 @@ void auto_aim_communication_data_parse(uint8_t rx_data)
 
 
 //发送
-//void sent_data_update()
-//{
-//
-//
-//    auto_aim_tx_packet.header = 0x5A;//包头
-//    auto_aim_tx_packet.detect_color = BLUE;//这里是自身颜色还是要识别的颜色待验证
-//    auto_aim_tx_packet.reset_tracker = reset_tracker;//重置跟踪器
-//    auto_aim_tx_packet.reserved = 0; // 保留位，不知道干啥的
-//    auto_aim_tx_packet.roll = roll;
-//    auto_aim_tx_packet.pitch = pitch;
-//    auto_aim_tx_packet.yaw = yaw;
-//    auto_aim_tx_packet.aim_x = aim_x;
-//    auto_aim_tx_packet.aim_y = aim_y;
-//    auto_aim_tx_packet.aim_z = aim_z;
-//
-//    memcpy(tx_buffer, &auto_aim_tx_packet, sizeof(auto_aim_tx_packet));
-//    //拷贝到缓冲区待发送
-//}
-//HAL_StatusTypeDef send_data_to_pc(uint8_t detect_color,
-//                                  bool reset_tracker,
-//                                  float roll,
-//                                  float pitch,
-//                                  float yaw,
-//                                  float aim_x,
-//                                  float aim_y,
-//                                  float aim_z)
-//{
-//
-//    uint8_t tx_buffer[sizeof(auto_aim_tx_packet)];
-//
-//    // 1. 填充数据包
-//
-//
-//    // 2. 计算CRC16
-//    // 注意：计算整个结构体的大小，包括checksum字段本身
-//    packet.checksum = calculate_crc16((uint8_t*)&packet, sizeof(SendPacket));
-//
-//    // 3. 将结构体拷贝到发送缓冲区
-//    // 虽然可以直接发送结构体地址，但拷贝到缓冲区是更稳妥的做法
-//    memcpy(tx_buffer, &packet, sizeof(SendPacket));
-//
-//    // 4. 通过HAL库发送数据
-//    // 使用HAL_UART_Transmit_DMA 可以实现非阻塞发送，效率更高
-//    // 这里为了示例，使用阻塞式发送
-//    return HAL_UART_Transmit(huart, tx_buffer, sizeof(SendPacket), 100); // 100ms超时
-//}
+void sent_data_update()
+{
 
+
+    auto_aim_tx_packet.header = 0x5A;//包头
+    auto_aim_tx_packet.detect_color = BLUE;//这里是自身颜色还是要识别的颜色待验证
+    auto_aim_tx_packet.reset_tracker = reset_tracker;//重置跟踪器
+    auto_aim_tx_packet.reserved = 0; // 保留位，不知道干啥的
+    auto_aim_tx_packet.roll = roll_radian_from_bmi088;
+    auto_aim_tx_packet.pitch = pitch_radian_from_bmi088;
+    auto_aim_tx_packet.yaw = yaw_radian_from_bmi088;
+    auto_aim_tx_packet.aim_x = aim_x;
+    auto_aim_tx_packet.aim_y = aim_y;
+    auto_aim_tx_packet.aim_z = aim_z;
+
+
+    memcpy(tx_buffer, &auto_aim_tx_packet, sizeof(auto_aim_tx_packet)); //拷贝到缓冲区
+
+    uint16_t calculated_crc = crc16_Get_CRC16_Check_Sum(tx_buffer,sizeof(auto_aim_tx_packet) - 2,0xFFFF);
+
+    tx_buffer[sizeof(auto_aim_tx_packet) - 2] = calculated_crc & 0xFF;       // CRC低字节
+    tx_buffer[sizeof(auto_aim_tx_packet) - 1] = (calculated_crc >> 8) & 0xFF; // CRC高字节
+
+    HAL_UART_Transmit_IT(&huart1, tx_buffer, sizeof(auto_aim_tx_packet)); // 100ms超时
+}
 
 
 //抽象CRC

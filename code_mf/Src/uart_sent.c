@@ -27,7 +27,7 @@ void uart_sent_debug()
 {
     while (1)
     {
-        usart6_printf("%f \r\n",INS_angle[2]);
+        usart6_printf("%f,%f,%f \r\n",pitch_radian_from_bmi088,roll_radian_from_bmi088,yaw_radian_from_bmi088);
 
 
 
@@ -45,7 +45,7 @@ void aim_uart_sent()
 {
     while (1)
     {
-        //2025.8.30完成了串口接收上位机发过来的数据，差下位机发送TF给上位机了，在这接着完成
+        sent_data_update();
 
         osDelay(5);
         osDelay(1);

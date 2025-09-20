@@ -52,6 +52,8 @@ extern struct SentPacket auto_aim_tx_packet;
 
 void auto_aim_communication_data_parse(uint8_t rx_data);
 
+void sent_data_update();
+
 uint16_t crc16_Get_CRC16_Check_Sum(const uint8_t *pchMessage, uint32_t dwLength, uint16_t wCRC) ;
 
 

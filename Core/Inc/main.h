@@ -192,6 +192,10 @@ extern float YAW_IMU_LAST_ECD ;
 extern float YAW_IMU_LAPS ;
 extern float YAW_IMU_ABSCISSA ;
 
+extern float aim_x ;
+extern float aim_y ;
+extern float aim_z ;
+
 
 extern uint8_t uart1_receive_data ;//串口当前接收字节
 

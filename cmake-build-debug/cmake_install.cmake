@@ -1,4 +1,4 @@
-# Install script for directory: D:/RoboMaster_git/RM2025_infantry_robot_auto_aim
+# Install script for directory: D:/RoboMaster_git/RM2026_infantry_robot
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -45,5 +45,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "D:/RoboMaster_git/RM2025_infantry_robot_auto_aim/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "D:/RoboMaster_git/RM2026_infantry_robot/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

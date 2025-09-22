@@ -27,11 +27,14 @@ void uart_sent_debug()
 {
     while (1)
     {
-        usart6_printf("%f,%f,%f,%f \r\n",
-                      yaw_imu_preprocess,
-                      YAW_6020_ID1_GIVEN_ANGLE,
+        usart6_printf("%d,%d,%f,%f,%f,%f,%f \r\n",
+                      rc_s1,
+                      auto_aim_rx_packet.tracking,
+                      pitch_radian_from_bmi088,
                       yaw_angle_from_bmi088,
-                      (YAW_6020_ID1_GIVEN_ANGLE - yaw_angle_from_bmi088));
+                      auto_aim_rx_packet.y,
+                      auto_aim_rx_packet.x,
+                      infantry_auto_aim_target.yaw_angle);
 
 
 

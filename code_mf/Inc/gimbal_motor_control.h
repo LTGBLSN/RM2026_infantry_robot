@@ -106,9 +106,9 @@ extern pid_type_def friction_wheel_3510_ID2_speed_pid;
 
 extern pid_type_def shoot_2006_ID3_speed_pid;
 
+void pid_preprocess();
 
-
-void yaw_imu_getAbscissa();//YAW里程计
+void yaw_imu_getAbscissa();//YAW轴pid预处理
 void motor_gimbal_angle_compute();//目标赋值
 
 void motor_gimbal_pid_compute();//pid计算

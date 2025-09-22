@@ -212,6 +212,10 @@ float aim_x ;
 float aim_y ;
 float aim_z ;
 
+float yaw_imu_preprocess ;
+
+struct armor_posture armor[4] ;
+
 
 uint8_t uart1_receive_data ;//串口当前接收字节
 

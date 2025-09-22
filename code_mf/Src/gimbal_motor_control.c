@@ -34,12 +34,12 @@ pid_type_def shoot_2006_ID3_speed_pid;
         friction_wheel_speed_control();//摩擦轮目标速度控制
         friction_wheel_pid_control();//摩擦轮pid控制
 
+        yaw_imu_getAbscissa() ;//陀螺仪数据处理
 
-        yaw_imu_getAbscissa() ;//更新陀螺仪总角度
 
         motor_gimbal_angle_compute();//目标角度控制
+        pid_preprocess();//pid预处理
         motor_gimbal_pid_compute();//云台pid控制
-
 
         shoot_pid_control();//拨弹盘pid控制
 
@@ -89,7 +89,19 @@ void motor_gimbal_angle_compute()
          }
 
 
-         YAW_6020_ID1_GIVEN_ANGLE = YAW_6020_ID1_GIVEN_ANGLE + (YAW_RC_IN_KP * (float)rc_ch2) ;
+         float YAW_GIVEN_ANGLE_COMPUTE = YAW_6020_ID1_GIVEN_ANGLE + (YAW_RC_IN_KP * (float)rc_ch2) ;
+
+         if(YAW_GIVEN_ANGLE_COMPUTE > 180.0f)
+         {
+             YAW_6020_ID1_GIVEN_ANGLE =  YAW_GIVEN_ANGLE_COMPUTE - 360.0f ;
+         }
+         else if(YAW_GIVEN_ANGLE_COMPUTE < -180.0f)
+         {
+             YAW_6020_ID1_GIVEN_ANGLE =  YAW_GIVEN_ANGLE_COMPUTE + 360.0f ;
+         } else
+         {
+             YAW_6020_ID1_GIVEN_ANGLE =  YAW_GIVEN_ANGLE_COMPUTE ;
+         }
 
      } else//键盘还没写
      {
@@ -104,6 +116,7 @@ void motor_gimbal_angle_compute()
 
 void yaw_imu_getAbscissa()
 {
+
     if((YAW_IMU_LAST_ECD - yaw_angle_from_bmi088) > 180.0f)
     {
 
@@ -119,9 +132,26 @@ void yaw_imu_getAbscissa()
 
     YAW_IMU_LAST_ECD = yaw_angle_from_bmi088 ;
 
+
     YAW_IMU_ABSCISSA = 360.0f * YAW_IMU_LAPS + yaw_angle_from_bmi088 ;
 
 
+}
+
+void pid_preprocess()
+{
+     if((YAW_6020_ID1_GIVEN_ANGLE - yaw_angle_from_bmi088) < -180.0f )
+     {
+         yaw_imu_preprocess = yaw_angle_from_bmi088 - 360.0f ;
+     }
+     else if((YAW_6020_ID1_GIVEN_ANGLE - yaw_angle_from_bmi088) > 180.0f )
+     {
+         yaw_imu_preprocess = yaw_angle_from_bmi088 + 360.0f ;
+     }
+     else
+     {
+         yaw_imu_preprocess = yaw_angle_from_bmi088 ;
+     }
 }
 
 
@@ -161,28 +191,6 @@ void friction_wheel_pid_control()
 
 
 
-
-
-
-
-
-
-void pitch_motor_mean_speed_compute()//弃用，滞后性有点大
-{
-     pitch_motor_mean_speed =
-             0.5f * (float)motor_can2_data[5].speed_rpm +
-             0.3f * (float)pitch_motor_speed_last_data[0]+
-             0.15f * (float)pitch_motor_speed_last_data[1]+
-             0.05f * (float)pitch_motor_speed_last_data[2] ;
-
-    pitch_motor_speed_last_data[2] = pitch_motor_speed_last_data[1] ;
-    pitch_motor_speed_last_data[1] = pitch_motor_speed_last_data[0] ;
-    pitch_motor_speed_last_data[0] = motor_can2_data[5].speed_rpm ;
-
-}
-
-
-
 void yaw_angle_pid_init(void)
 {
     static fp32 yaw_6020_id1_angle_kpkikd[3] = {YAW_6020_ID2_ANGLE_PID_KP, YAW_6020_ID2_ANGLE_PID_KI, YAW_6020_ID2_ANGLE_PID_KD};
@@ -192,7 +200,7 @@ void yaw_angle_pid_init(void)
 
 float yaw_angle_pid_loop(float YAW_6020_ID1_angle_set_loop)
 {
-    PID_calc(&yaw_6020_ID1_angle_pid, YAW_IMU_ABSCISSA , YAW_6020_ID1_angle_set_loop);
+    PID_calc(&yaw_6020_ID1_angle_pid, yaw_imu_preprocess , YAW_6020_ID1_angle_set_loop);
     float yaw_6020_ID1_given_speed_loop = (float)(yaw_6020_ID1_angle_pid.out);
 
     return yaw_6020_ID1_given_speed_loop ;

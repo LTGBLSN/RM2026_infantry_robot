@@ -197,6 +197,12 @@ extern float aim_y ;
 extern float aim_z ;
 
 
+extern float yaw_imu_preprocess ;
+
+
+extern struct armor_posture armor[4] ;
+
+
 extern uint8_t uart1_receive_data ;//串口当前接收字节
 
 /* USER CODE END EC */

@@ -27,7 +27,11 @@ void uart_sent_debug()
 {
     while (1)
     {
-        usart6_printf("%f,%f,%f \r\n",pitch_radian_from_bmi088,roll_radian_from_bmi088,yaw_radian_from_bmi088);
+        usart6_printf("%f,%f,%f,%f \r\n",
+                      yaw_imu_preprocess,
+                      YAW_6020_ID1_GIVEN_ANGLE,
+                      yaw_angle_from_bmi088,
+                      (YAW_6020_ID1_GIVEN_ANGLE - yaw_angle_from_bmi088));
 
 
 

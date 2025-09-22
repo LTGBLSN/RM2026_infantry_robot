@@ -56,7 +56,6 @@ void auto_aim_communication_data_parse(uint8_t rx_data)
             auto_aim_rx_index = 0; //重置索引
         }
     }
-
 }
 
 
@@ -68,7 +67,7 @@ void sent_data_update()
 
 
     auto_aim_tx_packet.header = 0x5A;//包头
-    auto_aim_tx_packet.detect_color = BLUE;//这里是自身颜色还是要识别的颜色待验证
+    auto_aim_tx_packet.detect_color = RED;//要识别的颜色待验证
     auto_aim_tx_packet.reset_tracker = reset_tracker;//重置跟踪器
     auto_aim_tx_packet.reserved = 0; // 保留位，不知道干啥的
     auto_aim_tx_packet.roll = roll_radian_from_bmi088;
@@ -87,6 +86,7 @@ void sent_data_update()
     tx_buffer[sizeof(auto_aim_tx_packet) - 1] = (calculated_crc >> 8) & 0xFF; // CRC高字节
 
     HAL_UART_Transmit_IT(&huart1, tx_buffer, sizeof(auto_aim_tx_packet)); // 100ms超时
+
 }
 
 

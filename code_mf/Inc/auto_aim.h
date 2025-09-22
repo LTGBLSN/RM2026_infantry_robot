@@ -8,6 +8,29 @@
 #include <stdbool.h>
 #include "main.h"
 
+
+#define OUTPOST_ARMOR 0 //前哨站
+#define HERO_ARMOR 1 //英雄
+#define ENGINEER_ARMOR 2 //工程
+#define INFANTRY_3_ARMOR 3 //步兵3
+#define INFANTRY_4_ARMOR 4 //步兵4
+#define INFANTRY_5_ARMOR 5 //步兵5
+#define GUARD_ARMOR 6 //哨兵
+#define BASE_ARMOR 7 //基地
+
+#define OUTPOST_ARMOR_QUANTITY 3//前哨站3个装甲板
+#define INFANTRY_ARMOR_QUANTITY 4//普通车4个装甲板
+
+struct armor_posture
+{
+    float x ;
+    float y ;
+    float z ;
+    float yaw ;
+};
+
+
+
 //必须和上位机一模一样
 struct ReceivePacket
 {

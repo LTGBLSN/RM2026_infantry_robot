@@ -34,7 +34,7 @@ pid_type_def shoot_2006_ID3_speed_pid;
         friction_wheel_speed_control();//摩擦轮目标速度控制
         friction_wheel_pid_control();//摩擦轮pid控制
 
-//        yaw_imu_getAbscissa() ;//陀螺仪数据处理   暂时没用
+        yaw_imu_getAbscissa() ;//陀螺仪数据处理
 
 
         motor_gimbal_angle_compute();//目标角度控制
@@ -88,21 +88,22 @@ void motor_gimbal_angle_compute()
              }
          }
 
-         if(rc_s1 == 1)
+
+         float YAW_GIVEN_ANGLE_COMPUTE = YAW_6020_ID1_GIVEN_ANGLE + (YAW_RC_IN_KP * (float)rc_ch2) ;
+
+         if(YAW_GIVEN_ANGLE_COMPUTE > 180.0f)
          {
-             if(auto_aim_rx_packet.tracking == 1)
-             {
-                 YAW_6020_ID1_GIVEN_ANGLE = infantry_auto_aim_target.yaw_angle ;
-             }
+             YAW_6020_ID1_GIVEN_ANGLE =  YAW_GIVEN_ANGLE_COMPUTE - 360.0f ;
+         }
+         else if(YAW_GIVEN_ANGLE_COMPUTE < -180.0f)
+         {
+             YAW_6020_ID1_GIVEN_ANGLE =  YAW_GIVEN_ANGLE_COMPUTE + 360.0f ;
          } else
          {
-             rc_yaw_input_normalization();
+             YAW_6020_ID1_GIVEN_ANGLE =  YAW_GIVEN_ANGLE_COMPUTE ;
          }
 
-
-
-
-     } else//鼠标还没写
+     } else//键盘还没写
      {
 //         PITCH_6020_ID2_GIVEN_SPEED = MOUSE_VY_SPEED_SCALING_FACTOR * (float)-mouse_vy - PITCH_OFF_FRICTION_STOP_SPEED_COMPENSATE;
 //         YAW_6020_ID1_GIVEN_SPEED = MOUSE_VX_SPEED_SCALING_FACTOR * (float)-mouse_vx ;
@@ -136,25 +137,6 @@ void yaw_imu_getAbscissa()
 
 
 }
-
-
-void rc_yaw_input_normalization()
-{
-    float YAW_GIVEN_ANGLE_COMPUTE = YAW_6020_ID1_GIVEN_ANGLE + (YAW_RC_IN_KP * (float)rc_ch2) ;
-
-    if(YAW_GIVEN_ANGLE_COMPUTE > 180.0f)
-    {
-        YAW_6020_ID1_GIVEN_ANGLE =  YAW_GIVEN_ANGLE_COMPUTE - 360.0f ;
-    }
-    else if(YAW_GIVEN_ANGLE_COMPUTE < -180.0f)
-    {
-        YAW_6020_ID1_GIVEN_ANGLE =  YAW_GIVEN_ANGLE_COMPUTE + 360.0f ;
-    } else
-    {
-        YAW_6020_ID1_GIVEN_ANGLE =  YAW_GIVEN_ANGLE_COMPUTE ;
-    }
-}
-
 
 void pid_preprocess()
 {

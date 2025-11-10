@@ -216,10 +216,6 @@ float yaw_imu_preprocess ;
 
 struct armor_posture armor[4] ;
 
-struct auto_aim_calculation_gimbal_target infantry_auto_aim_target ;
-
-
-
 
 uint8_t uart1_receive_data ;//串口当前接收字节
 

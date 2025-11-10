@@ -109,8 +109,6 @@ extern pid_type_def shoot_2006_ID3_speed_pid;
 void pid_preprocess();
 
 void yaw_imu_getAbscissa();//YAW轴pid预处理
-
-void rc_yaw_input_normalization();
 void motor_gimbal_angle_compute();//目标赋值
 
 void motor_gimbal_pid_compute();//pid计算

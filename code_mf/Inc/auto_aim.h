@@ -21,18 +21,7 @@
 #define OUTPOST_ARMOR_QUANTITY 3//前哨站3个装甲板
 #define INFANTRY_ARMOR_QUANTITY 4//普通车4个装甲板
 
-struct auto_aim_calculation_gimbal_target
-{
-    float yaw_angle ;
-    float pitch_angle ;
-    float if_shoot ;
-    float vx ;
-    float vy ;
-    float vround ;
-};
-
-
-struct armor_posture//装甲板位姿
+struct armor_posture
 {
     float x ;
     float y ;
@@ -46,20 +35,20 @@ struct armor_posture//装甲板位姿
 struct ReceivePacket
 {
     uint8_t header;         // 包头 0xA5
-    uint8_t tracking : 1;   // 低1位是 tracking 代表当前是否锁定目标
-    uint8_t id : 3;         // 接下来的3位是 id 0-outpost 6-guard 7-base
-    uint8_t armors_num : 3; // 再接下来的3位是 armors_num 2-balance 3-outpost 4-normal
-    float x;                // 目标 x 坐标(世界坐标系)
-    float y;                // 目标 y 坐标(世界坐标系)
-    float z;                // 目标 z 坐标(世界坐标系)
-    float yaw;              // 目标倾斜角度(世界坐标系)
-    float vx;               // x 方向速度(世界坐标系)
-    float vy;               // y 方向速度(世界坐标系)
-    float vz;               // z 方向速度(世界坐标系)
+    uint8_t tracking : 1;   // 低1位是 tracking
+    uint8_t id : 3;         // 接下来的3位是 id
+    uint8_t armors_num : 3; // 再接下来的3位是 armors_num
+    float x;                // 目标 x 坐标
+    float y;                // 目标 y 坐标
+    float z;                // 目标 z 坐标
+    float yaw;              // 目标倾斜角度
+    float vx;               // x 方向速度
+    float vy;               // y 方向速度
+    float vz;               // z 方向速度
     float v_yaw;            // 目标旋转角速度
-    float r1;               // 装甲板半径1目标其中一组装甲板相对中心的半径
-    float r2;               // 装甲板半径2目标另一组装甲板相对中心的半径
-    float dz;               // tracking 中的装甲板的上一块装甲板的 z 轴位置
+    float r1;               // 装甲板半径1
+    float r2;               // 装甲板半径2
+    float dz;               // 上一块装甲板的 z 轴位置
     uint16_t checksum;      // CRC16 校验和 (小端)
 } __attribute__((packed)); // 关键！防止编译器优化对齐，确保内存布局一致
 

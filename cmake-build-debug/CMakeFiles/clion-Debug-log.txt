@@ -14,6 +14,6 @@
 -- Detecting CXX compile features
 -- Detecting CXX compile features - done
 -- Minimal optimization, debug info included
--- Configuring done (1.5s)
+-- Configuring done (0.9s)
 -- Generating done (0.0s)
 -- Build files have been written to: D:/RoboMaster_git/RM2026_infantry_robot/cmake-build-debug

@@ -26,4 +26,5 @@ void imu_connection_status();
 void yaw_6020_status();
 void pitch_6020_status();
 
+void auto_aim_com_check();
 #endif //BUBING_RM2025_ERROR_DETECTION_H

@@ -1,5 +1,6 @@
 #include <stdbool.h>
 #include <string.h>
+#include <math.h>
 #include "main.h"
 #include "auto_aim.h"
 #include "refree_task.h"
@@ -56,6 +57,16 @@ void auto_aim_communication_data_parse(uint8_t rx_data)
             auto_aim_rx_index = 0; //重置索引
         }
     }
+
+    //自瞄解算
+    //2025.9.22暂时仅取中心点，仅解算yaw
+    infantry_auto_aim_target.yaw_angle = (0.0f + (float)atan2f(auto_aim_rx_packet.y, auto_aim_rx_packet.x) * (float )( 180.0f / M_PI ) );
+//    auto_aim_rx_packet.x
+
+
+
+
+
 }
 
 

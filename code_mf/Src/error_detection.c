@@ -81,3 +81,14 @@ void pitch_6020_status()
 }
 
 
+void auto_aim_com_check()
+{
+    if((HAL_GetTick() - auto_aim_com_update_time) > 4000)
+    {
+        MX_USART1_UART_Init();
+
+        auto_aim_com_update_time = HAL_GetTick() ;
+    }
+}
+
+

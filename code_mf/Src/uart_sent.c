@@ -27,11 +27,10 @@ void uart_sent_debug()
 {
     while (1)
     {
-        usart6_printf("%f,%f,%f,%f \r\n",
-                      yaw_imu_preprocess,
-                      YAW_6020_ID1_GIVEN_ANGLE,
-                      yaw_angle_from_bmi088,
-                      (YAW_6020_ID1_GIVEN_ANGLE - yaw_angle_from_bmi088));
+        usart6_printf("%d,%d,%d \r\n",
+                      auto_aim_rx_packet.tracking,
+                      HAL_GetTick(),
+                      auto_aim_com_update_time);
 
 
 

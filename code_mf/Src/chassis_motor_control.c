@@ -161,17 +161,13 @@ void chassis_settlement()
             chassis_vround = 0.25f * beyond_power ;
         } else if(rc_s0 == 3)
         {
-            if((gyro_state % 2) == 1 )
-            {
-                chassis_vround = 0.25f * beyond_power ;
-            }
-            else
-            {
-                CHASSIS_FOLLOW_GIMBAL_GIVEN_SPEED = chassis_follow_gimbal_pid_loop(YAW_MID_ECD);//底盘跟随
-                chassis_vround = CHASSIS_FOLLOW_GIMBAL_GIVEN_SPEED ;
-//                chassis_vround = 0 ;//在这给底盘跟随做速度闭环
-            }
 
+            CHASSIS_FOLLOW_GIMBAL_GIVEN_SPEED = chassis_follow_gimbal_pid_loop(YAW_MID_ECD);//底盘跟随
+            chassis_vround = CHASSIS_FOLLOW_GIMBAL_GIVEN_SPEED ;
+
+        } else
+        {
+            chassis_vround = 0 ;
         }
 
 

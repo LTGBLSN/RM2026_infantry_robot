@@ -24,7 +24,7 @@ void BMI088_delay_ms(uint16_t ms)
 
 //void BMI088_delay_us(uint16_t us)
 //{
-
+//
 //    uint32_t ticks = 0;
 //    uint32_t told = 0;
 //    uint32_t tnow = 0;
@@ -53,21 +53,21 @@ void BMI088_delay_ms(uint16_t ms)
 //            }
 //        }
 //    }
-
-
+//
+//
 //}
 
 void BMI088_delay_us(uint16_t us)
 {
-	
+
 	uint32_t last_time = 0 ;
 	last_time = HAL_GetTick();
     while( (HAL_GetTick() - last_time) < 1)
 	{
-		
+
 	}
 	last_time = HAL_GetTick();
-	
+
 }
 
 

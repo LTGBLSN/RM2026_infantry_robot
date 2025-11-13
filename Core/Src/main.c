@@ -312,8 +312,12 @@ int main(void)
 
     local_rc_ctrl = get_remote_control_point();//遥控器初始化
 
-    can_filter_init();//can通讯初始化
+    HAL_Delay(4);
+
     BMI088_init();
+
+    can_filter_init();//can通讯初始化
+
 
     //底盘电机初始化
     chassis_3508_id1_speed_pid_init();

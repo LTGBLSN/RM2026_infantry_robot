@@ -12,6 +12,7 @@ void IMU_DATA_GET()
 {
     while (1)
     {
+
         BMI088_read(gyro,acce,&temp);
         roll_speed_from_bmi088 = gyro[0];
         pitch_speed_from_bmi088 = gyro[1];
@@ -31,6 +32,8 @@ void IMU_DATA_GET()
         yaw_radian_from_bmi088 = INS_angle[0] ;
         pitch_radian_from_bmi088 = INS_angle[1] ;
         roll_radian_from_bmi088 = INS_angle[2] ;
+
+
 
 
 

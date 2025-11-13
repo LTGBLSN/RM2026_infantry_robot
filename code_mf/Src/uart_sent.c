@@ -27,10 +27,8 @@ void uart_sent_debug()
 {
     while (1)
     {
-        usart6_printf("%d,%d,%d \r\n",
-                      auto_aim_rx_packet.tracking,
-                      HAL_GetTick(),
-                      auto_aim_com_update_time);
+        usart6_printf("%d,%f \r\n",
+                      rc_s0,chassis_vround);
 
 
 

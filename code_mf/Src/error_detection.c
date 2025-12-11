@@ -28,6 +28,7 @@ void error_detection()
         rc_connection_status();//遥控器离线判断
         yaw_6020_status();//yaw电机过温判断
         pitch_6020_status();//pitch电机过温判断
+        //暂无自瞄通讯判断
 
 
 

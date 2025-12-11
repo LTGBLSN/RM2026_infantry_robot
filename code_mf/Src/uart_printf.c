@@ -16,7 +16,7 @@ void usart6_printf(const char *fmt, ...)
 
     va_end(ap);
 
-    HAL_UART_Transmit(&huart6,tx_buf, len,100);//在这修改发送的串口，包括上面的‘extern’后面的
+    HAL_UART_Transmit(&huart6,tx_buf, len,10);//在这修改发送的串口，包括上面的‘extern’后面的
 
 }
 

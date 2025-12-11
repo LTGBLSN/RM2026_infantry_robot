@@ -184,30 +184,24 @@ extern float pitch_radian_from_bmi088 ;
 extern float yaw_radian_from_bmi088 ;
 extern float roll_radian_from_bmi088 ;
 
-extern bool reset_tracker ;
 
-extern uint8_t tx_buffer[sizeof(auto_aim_tx_packet)];
+
+
 
 extern float YAW_IMU_LAST_ECD ;
 extern float YAW_IMU_LAPS ;
 extern float YAW_IMU_ABSCISSA ;
 
-extern float aim_x ;
-extern float aim_y ;
-extern float aim_z ;
 
 
 extern float yaw_imu_preprocess ;
 
-
-extern struct armor_posture armor[4] ;
-
-extern struct auto_aim_calculation_gimbal_target infantry_auto_aim_target ;
-
-
 extern uint8_t uart1_receive_data ;//串口当前接收字节
 
 extern uint32_t auto_aim_com_update_time ;//自瞄通讯时间戳
+
+extern float auto_aim_los_pitch_angle ;
+extern float auto_aim_los_yaw_angle ;
 
 /* USER CODE END EC */
 

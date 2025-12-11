@@ -65,6 +65,34 @@ void motor_gimbal_angle_compute()
 {
      if(mouse_vy == 0 & mouse_vx == 0)
      {
+
+
+         if(rc_s1 == 1)
+         {
+             if(auto_aim_rx_packet.distance != (-1.0f))//自瞄开火建议为1的时候才建议进行闭环，否则目标角度是0
+             {
+                 YAW_6020_ID1_GIVEN_ANGLE = auto_aim_rx_packet.yaw ;
+                 PITCH_6020_ID2_GIVEN_ANGLE = -auto_aim_rx_packet.pitch ;
+
+                 auto_aim_los_yaw_angle = YAW_6020_ID1_GIVEN_ANGLE ;
+                 auto_aim_los_pitch_angle = PITCH_6020_ID2_GIVEN_ANGLE ;
+
+
+             }
+             else//这里写没识别到但是仍然开启自瞄的动作，如仍然遥控器等
+             {
+                 rc_yaw_input_normalization();
+//                 YAW_6020_ID1_GIVEN_ANGLE = auto_aim_los_yaw_angle ;
+//                 PITCH_6020_ID2_GIVEN_ANGLE = auto_aim_los_pitch_angle ;
+             }
+
+         } else
+         {
+             rc_yaw_input_normalization();
+         }
+
+
+
          if((PITCH_RC_IN_KP * (float )rc_ch3) < 0 )
          {
              if(PITCH_6020_ID2_GIVEN_ANGLE < -23.0f )
@@ -86,17 +114,6 @@ void motor_gimbal_angle_compute()
              {
                  PITCH_6020_ID2_GIVEN_ANGLE = PITCH_6020_ID2_GIVEN_ANGLE + PITCH_RC_IN_KP * (float )rc_ch3  ;
              }
-         }
-
-         if(rc_s1 == 1)
-         {
-             if(auto_aim_rx_packet.tracking == 1)
-             {
-                 YAW_6020_ID1_GIVEN_ANGLE = infantry_auto_aim_target.yaw_angle ;
-             }
-         } else
-         {
-             rc_yaw_input_normalization();
          }
 
 

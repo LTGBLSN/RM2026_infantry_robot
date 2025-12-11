@@ -39,7 +39,7 @@ void shoot_speed_compute()
     }
     else
     {
-        if(rc_ch4 < -300 | mouse_press_l == 1)
+        if(rc_ch4 < -300)
         {
             SHOOT_2006_ID3_GIVEN_SPEED = SHOOT_TURN_ON_SPEED ;
         }

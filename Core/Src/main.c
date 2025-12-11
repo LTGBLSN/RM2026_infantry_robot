@@ -201,22 +201,16 @@ float roll_radian_from_bmi088 ;
 bool reset_tracker = false ;
 
 
-uint8_t tx_buffer[sizeof(auto_aim_tx_packet)];
+
 
 float YAW_IMU_LAST_ECD ;
 float YAW_IMU_LAPS ;
 float YAW_IMU_ABSCISSA ;
 
 
-float aim_x ;
-float aim_y ;
-float aim_z ;
 
 float yaw_imu_preprocess ;
 
-struct armor_posture armor[4] ;
-
-struct auto_aim_calculation_gimbal_target infantry_auto_aim_target ;
 
 
 
@@ -224,6 +218,9 @@ struct auto_aim_calculation_gimbal_target infantry_auto_aim_target ;
 uint8_t uart1_receive_data ;//串口当前接收字节
 
 uint32_t auto_aim_com_update_time ;
+
+float auto_aim_los_pitch_angle ;
+float auto_aim_los_yaw_angle ;
 
 
 /* USER CODE END PTD */

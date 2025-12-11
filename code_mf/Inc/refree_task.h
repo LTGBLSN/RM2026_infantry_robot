@@ -17,8 +17,8 @@
 #define LEVEL_9_MAX_POWER  15000
 #define LEVEL_10_MAX_POWER 15000
 
-#define RED 0
-#define BLUE 1
+#define RED 0x00
+#define BLUE 0x01
 
 void max_power_compute();
 

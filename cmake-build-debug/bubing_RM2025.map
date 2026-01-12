@@ -5156,7 +5156,7 @@ LOAD C:/CLionToolchains/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-e
  .debug_rnglists
                 0x000014a8       0x19 CMakeFiles/bubing_RM2025.elf.dir/code_mf/Src/uart_sent.c.obj
 
-.debug_line     0x00000000    0x1d6ec
+.debug_line     0x00000000    0x1d6f0
  .debug_line    0x00000000      0x4d5 CMakeFiles/bubing_RM2025.elf.dir/Core/Src/can.c.obj
  .debug_line    0x000004d5      0x207 CMakeFiles/bubing_RM2025.elf.dir/Core/Src/dma.c.obj
  .debug_line    0x000006dc      0x5b7 CMakeFiles/bubing_RM2025.elf.dir/Core/Src/freertos.c.obj
@@ -5196,19 +5196,19 @@ LOAD C:/CLionToolchains/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-e
  .debug_line    0x00019c9c      0x26e CMakeFiles/bubing_RM2025.elf.dir/code_mf/Src/board_LED.c.obj
  .debug_line    0x00019f0a      0x27a CMakeFiles/bubing_RM2025.elf.dir/code_mf/Src/bsp_can.c.obj
  .debug_line    0x0001a184      0x2ad CMakeFiles/bubing_RM2025.elf.dir/code_mf/Src/bsp_rc.c.obj
- .debug_line    0x0001a431      0x274 CMakeFiles/bubing_RM2025.elf.dir/code_mf/Src/can_sent.c.obj
- .debug_line    0x0001a6a5      0x7ca CMakeFiles/bubing_RM2025.elf.dir/code_mf/Src/chassis_motor_control.c.obj
- .debug_line    0x0001ae6f      0x36c CMakeFiles/bubing_RM2025.elf.dir/code_mf/Src/error_detection.c.obj
- .debug_line    0x0001b1db      0x423 CMakeFiles/bubing_RM2025.elf.dir/code_mf/Src/get_rc.c.obj
- .debug_line    0x0001b5fe      0x6aa CMakeFiles/bubing_RM2025.elf.dir/code_mf/Src/gimbal_motor_control.c.obj
- .debug_line    0x0001bca8      0x300 CMakeFiles/bubing_RM2025.elf.dir/code_mf/Src/pid.c.obj
- .debug_line    0x0001bfa8      0x31d CMakeFiles/bubing_RM2025.elf.dir/code_mf/Src/refree_task.c.obj
- .debug_line    0x0001c2c5      0x4fa CMakeFiles/bubing_RM2025.elf.dir/code_mf/Src/remote_control.c.obj
- .debug_line    0x0001c7bf      0x37c CMakeFiles/bubing_RM2025.elf.dir/code_mf/Src/servo_task.c.obj
- .debug_line    0x0001cb3b      0x361 CMakeFiles/bubing_RM2025.elf.dir/code_mf/Src/shoot_control.c.obj
- .debug_line    0x0001ce9c      0x2e4 CMakeFiles/bubing_RM2025.elf.dir/code_mf/Src/uart_callback.c.obj
- .debug_line    0x0001d180      0x302 CMakeFiles/bubing_RM2025.elf.dir/code_mf/Src/uart_printf.c.obj
- .debug_line    0x0001d482      0x26a CMakeFiles/bubing_RM2025.elf.dir/code_mf/Src/uart_sent.c.obj
+ .debug_line    0x0001a431      0x278 CMakeFiles/bubing_RM2025.elf.dir/code_mf/Src/can_sent.c.obj
+ .debug_line    0x0001a6a9      0x7ca CMakeFiles/bubing_RM2025.elf.dir/code_mf/Src/chassis_motor_control.c.obj
+ .debug_line    0x0001ae73      0x36c CMakeFiles/bubing_RM2025.elf.dir/code_mf/Src/error_detection.c.obj
+ .debug_line    0x0001b1df      0x423 CMakeFiles/bubing_RM2025.elf.dir/code_mf/Src/get_rc.c.obj
+ .debug_line    0x0001b602      0x6aa CMakeFiles/bubing_RM2025.elf.dir/code_mf/Src/gimbal_motor_control.c.obj
+ .debug_line    0x0001bcac      0x300 CMakeFiles/bubing_RM2025.elf.dir/code_mf/Src/pid.c.obj
+ .debug_line    0x0001bfac      0x31d CMakeFiles/bubing_RM2025.elf.dir/code_mf/Src/refree_task.c.obj
+ .debug_line    0x0001c2c9      0x4fa CMakeFiles/bubing_RM2025.elf.dir/code_mf/Src/remote_control.c.obj
+ .debug_line    0x0001c7c3      0x37c CMakeFiles/bubing_RM2025.elf.dir/code_mf/Src/servo_task.c.obj
+ .debug_line    0x0001cb3f      0x361 CMakeFiles/bubing_RM2025.elf.dir/code_mf/Src/shoot_control.c.obj
+ .debug_line    0x0001cea0      0x2e4 CMakeFiles/bubing_RM2025.elf.dir/code_mf/Src/uart_callback.c.obj
+ .debug_line    0x0001d184      0x302 CMakeFiles/bubing_RM2025.elf.dir/code_mf/Src/uart_printf.c.obj
+ .debug_line    0x0001d486      0x26a CMakeFiles/bubing_RM2025.elf.dir/code_mf/Src/uart_sent.c.obj
 
 .debug_str      0x00000000     0x97af
  .debug_str     0x00000000     0x97af CMakeFiles/bubing_RM2025.elf.dir/Core/Src/can.c.obj

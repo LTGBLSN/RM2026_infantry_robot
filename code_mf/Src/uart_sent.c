@@ -27,17 +27,12 @@ void uart_sent_debug()
 {
     while (1)
     {
-        int16_t a = auto_aim_rx_packet.fite_advance ;
-        usart6_printf("%f,%f,%f,%d \r\n",
-                      auto_aim_rx_packet.yaw,
-                      auto_aim_rx_packet.distance,
-                      yaw_angle_from_bmi088,
-                      a);
+        usart6_printf("helloworld \r\n");
 
 
 
 
-        osDelay(5);
+        osDelay(1);
 
 
 
@@ -52,7 +47,7 @@ void aim_uart_sent()
     while (1)
     {
         sent_data_update();
-
+        
         osDelay(5);
         osDelay(1);
     }
